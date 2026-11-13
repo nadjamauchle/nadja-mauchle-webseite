@@ -57,15 +57,15 @@ select:focus-visible {
 
 /* Standard-Link-Styling für Fliesstext und Footer/Legal-Links, mit markenkonformer
    Aubergine-Farbe statt Browser-Default-Blau */
-a:not(.btn):not(.navbar-brand):not(.nav-link):not(.hero-cta-primary):not(.hero-cta-secondary):not(.on-light-icon):not(.artefakt-link) {
+a:not(.btn):not(.navbar-brand):not(.nav-link):not(.hero-cta-primary):not(.hero-cta-secondary):not(.on-light-icon):not(.card-link) {
   color: var(--aubergine);
   text-decoration: underline;
   text-underline-offset: 0.18em;
   text-decoration-color: currentColor;
 }
 
-a:not(.btn):not(.navbar-brand):not(.nav-link):not(.hero-cta-primary):not(.hero-cta-secondary):not(.on-light-icon):not(.artefakt-link):hover,
-a:not(.btn):not(.navbar-brand):not(.nav-link):not(.hero-cta-primary):not(.hero-cta-secondary):not(.on-light-icon):not(.artefakt-link):focus-visible {
+a:not(.btn):not(.navbar-brand):not(.nav-link):not(.hero-cta-primary):not(.hero-cta-secondary):not(.on-light-icon):not(.card-link):hover,
+a:not(.btn):not(.navbar-brand):not(.nav-link):not(.hero-cta-primary):not(.hero-cta-secondary):not(.on-light-icon):not(.card-link):focus-visible {
   color: var(--aubergine);
 }
 
@@ -222,6 +222,19 @@ section {
 #start {
   padding-top: 148px;
   padding-bottom: var(--section-padding-y);
+}
+
+.hero-row {
+  margin-left: -8px;
+  align-items: center;
+}
+
+.hero-row .col-lg-7 {
+  margin-left: -4px;
+}
+
+.hero-row .col-lg-5 {
+  margin-left: -18px;
 }
 
 header > :first-child,
@@ -405,10 +418,13 @@ section > :last-child {
 }
 
 .hero-portrait {
-  width: 280px;
-  height: 280px;
+  width: 290px;
+  height: 290px;
   border-radius: 50%;
   overflow: hidden;
+  margin-left: 0;
+  margin-top: 4px;
+  transform: translateY(0);
 }
 
 .hero-portrait img {
@@ -437,18 +453,28 @@ section > :last-child {
 
 .workshop-bilder {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 28px;
   margin: 40px auto 0;
-  max-width: 640px;
+  max-width: 760px;
+  align-items: stretch;
 }
 
 .workshop-bilder img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 300px;
   object-fit: cover;
+  object-position: center center;
   border-radius: 4px;
+}
+
+.podcast-photo {
+  width: 112%;
+  margin-left: -6%;
+  object-fit: cover;
+  object-position: center center;
+  filter: grayscale(100%);
 }
 
 .bildunterschrift {
@@ -885,7 +911,7 @@ section > :last-child {
   flex: 1;
 }
 
-.artefakt-link {
+.card-link {
   position: relative;
   display: inline-flex;
   width: fit-content;
@@ -901,7 +927,7 @@ section > :last-child {
   transition: color 0.15s ease;
 }
 
-.artefakt-link::after {
+.card-link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -915,14 +941,14 @@ section > :last-child {
   transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.artefakt-link:hover,
-.artefakt-link:focus-visible {
+.card-link:hover,
+.card-link:focus-visible {
   color: var(--aubergine);
   text-decoration: none;
 }
 
-.artefakt-link:hover::after,
-.artefakt-link:focus-visible::after {
+.card-link:hover::after,
+.card-link:focus-visible::after {
   opacity: 1;
   transform: scaleX(1);
 }
@@ -946,13 +972,17 @@ section > :last-child {
   background: var(--paper-alt);
   border: 1px solid var(--line);
   border-radius: 4px;
-  text-decoration: none;
-  transition: border-color 0.15s ease;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.mention-card:hover {
+.mention-card:hover,
+.mention-card:focus-within {
   border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(35, 25, 29, 0.06);
 }
+
 
 .mention-icon {
   display: flex;
@@ -964,6 +994,11 @@ section > :last-child {
   background: var(--aubergine);
   color: var(--flieder);
   font-size: 1.05rem;
+}
+
+.mention-icon i {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .mention-title {
@@ -1256,11 +1291,22 @@ section > :last-child {
 
 /* ---------- Angebot: Karten ---------- */
 
+.row.justify-content-center > [class*="col-"] {
+  display: flex;
+}
+
 .angebot-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   background: var(--aubergine-light);
   border: 1px solid rgba(241, 229, 233, 0.15);
   border-radius: 4px;
   padding: 2rem 2rem 2.2rem;
+}
+
+.angebot-card .btn-accent {
+  margin-top: auto;
 }
 
 /* ---------- Kontakt: Formular ---------- */
