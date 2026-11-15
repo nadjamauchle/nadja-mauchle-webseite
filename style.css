@@ -790,6 +790,15 @@ section > :last-child {
   color: var(--ink-soft);
 }
 
+/* Trenner zwischen den Kurzfakten: feiner vertikaler Strich statt Mittelpunkt */
+.co-labor-short-facts .short-facts-sep {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background-color: currentColor;
+  opacity: 0.6;
+}
+
 .co-labor-short-facts .accent-inline {
   color: var(--aubergine);
   font-weight: 500;
