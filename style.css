@@ -647,7 +647,7 @@ section > :last-child {
 .testimonial-quote {
   font-family: var(--font-display);
   font-style: italic;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.05rem;
   border-left: 3px solid var(--flieder);
   padding-left: 0.9rem;
@@ -1085,38 +1085,59 @@ section > :last-child {
   margin-top: 0;
 }
 
+/* Ablauf: vertikale Zeitleiste mit Punkten statt grosser Ziffern und Trennlinien */
+.co-labor-steps {
+  gap: 0;
+}
+
 .step-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 0.1rem 0 0;
-  border-top: 1px solid var(--line);
+  position: relative;
+  padding: 0 0 1.4rem 1.9rem;
 }
 
-.step-item:first-child {
-  border-top: none;
-  padding-top: 0;
+.step-item:last-child {
+  padding-bottom: 0;
 }
 
-.step-index {
-  flex-shrink: 0;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 700;
-  font-size: clamp(1.8rem, 2.8vw, 2.3rem);
-  line-height: 0.9;
-  color: var(--flieder);
-  letter-spacing: -0.04em;
-  min-width: 2ch;
-  padding-top: 0.15rem;
+.step-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: var(--flieder);
+}
+
+.step-item::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1.25rem;
+  bottom: 0.15rem;
+  width: 1px;
+  background-color: var(--flieder);
+  opacity: 0.45;
+}
+
+.step-item:last-child::after {
+  display: none;
 }
 
 .step-content {
   font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.step-content strong {
+  display: block;
   font-size: 1rem;
-  line-height: 1.7;
+  font-weight: 600;
   color: var(--ink);
-  padding-top: 0.3rem;
+  margin-bottom: 0.1rem;
 }
 
 .custom-accordion .accordion-button {
@@ -1463,4 +1484,137 @@ section > :last-child {
 
 .angebot-toggle[aria-expanded="true"] i {
   transform: rotate(180deg);
+}
+
+
+/* Angebots-Unterseiten: angenehme Zeilenlänge (ca. 70 Zeichen) statt voller Breite */
+.co-labor-detail-page .container-lg,
+.mentoring-detail-page .container-lg {
+  max-width: 760px;
+}
+
+/* Angebots-Unterseiten: am Desktop keine automatische Silbentrennung,
+   die Spalte ist breit genug und ganze Wörter lesen sich ruhiger */
+@media (min-width: 768px) {
+  .co-labor-detail-page,
+  .mentoring-detail-page {
+    hyphens: manual;
+  }
+}
+
+
+/* ---------- Angebots-Unterseiten: Umbau Lesefreundlichkeit ---------- */
+
+/* Knopf direkt unter den Kurzfakten */
+.offer-cta-top {
+  margin: -8px 0 48px;
+}
+
+/* Kleine Zwischenüberschrift innerhalb eines Abschnitts (z.B. Typische Themen) */
+.offer-subhead {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+
+.offer-lead-sm {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+}
+
+/* Ablauf als zweispaltige Tabelle: links Schritt, rechts Inhalt */
+.offer-steps,
+.glance-list {
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.offer-steps-row,
+.glance-list-row {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 0.25rem 1.5rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.offer-steps-row:first-child,
+.glance-list-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.offer-steps dt,
+.glance-list dt {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+.offer-steps dd,
+.glance-list dd {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+
+.glance-list dt {
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 575px) {
+  .offer-steps-row,
+  .glance-list-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* "Auf einen Blick": getönter Kasten, ersetzt Format + Investition */
+.glance-box {
+  background: var(--paper-alt);
+  border-radius: 6px;
+  padding: 1.75rem 1.75rem 1.25rem;
+  margin: 0 0 48px;
+}
+
+.glance-box .glance-list {
+  margin-bottom: 8px;
+}
+
+.glance-box .glance-list-row {
+  border-top-color: #D9D2C6;
+}
+
+.glance-note {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 12px 0 0;
+}
+
+@media (max-width: 575px) {
+  .glance-box {
+    padding: 1.25rem 1.1rem 1rem;
+  }
+}
+
+/* "Wer dich begleitet" auf dem Handy: Foto über dem Text statt daneben */
+@media (max-width: 575px) {
+  .co-labor-detail-page .d-flex.align-items-center.gap-3,
+  .mentoring-detail-page .d-flex.align-items-center.gap-3 {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
 }
